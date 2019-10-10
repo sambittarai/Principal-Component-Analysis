@@ -106,3 +106,26 @@ eigenvalueCount = np.arange(n_components)
 plt.plot(eigenvalueCount, ratio_cumsum[:n_components])
 plt.title('Compactness')
 plt.show()
+
+#By taking the top 150 dimensions of data with highest variance we can represent 95% of our data
+
+#Use the PCA 'face space' as features and build a random forest classifier to classify the faces according to the labels.
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_val_score
+
+#Build the random forest
+estimator = RandomForestClassifier(n_estimators=150, max_depth=15, max_features=150)
+estimator.fit(X_transformed, y_train) # expects X as [n_samples, n_features]
+
+predictions = estimator.predict(X_test_transformed)
+correct = predictions==y_test
+total_test = len(X_test_transformed)
+
+#Results
+print("Total Testing:", total_test)
+#print("Predictions:", predictions)
+#print("Which Correct:", correct)
+print("Total Correct:", np.sum(correct))
+print("Accuracy:", np.sum(correct)/total_test)
+
+print(classification_report(y_test, predictions, target_names=target_names))
