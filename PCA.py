@@ -94,3 +94,15 @@ eigenface_titles = ["eigenface %d" % i for i in range(eigenfaces.shape[0])]
 plot_gallery(eigenfaces, eigenface_titles, h, w)
   
 plt.show()
+
+#We should always evaluate the performance of the dimensionality reduction via a compactness plot
+explained_variance = (S**2)/(n_samples - 1)
+total_var = explained_variance.sum()
+explained_variance_ratio = explained_variance/total_var
+ratio_cumsum = np.cumsum(explained_variance_ratio)
+print(ratio_cumsum.shape)
+eigenvalueCount = np.arange(n_components)
+
+plt.plot(eigenvalueCount, ratio_cumsum[:n_components])
+plt.title('Compactness')
+plt.show()
