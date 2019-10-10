@@ -55,3 +55,14 @@ n_components = 150 #Top 150 dimensions with highest variance
 mean = np.mean(X_train, axis=0)
 X_train -= mean
 X_test -= mean
+
+#Eigen-decomposition
+U, S, V = np.linalg.svd(X_train, full_matrices=False)
+components = V[:n_components]
+eigenfaces = components.reshape((n_components, h, w))
+
+#eigenfaces.shape -> (150, 50, 37)
+#components.shape -> (150, 1850)
+
+#U.shape -> (966, 966)
+#V.shape -> (966, 1850)
