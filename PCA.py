@@ -66,3 +66,31 @@ eigenfaces = components.reshape((n_components, h, w))
 
 #U.shape -> (966, 966)
 #V.shape -> (966, 1850)
+
+#Project into PCA subspace
+X_transformed = np.dot(X_train, components.T)
+print(X_transformed.shape)
+X_test_transformed = np.dot(X_test, components.T)
+print(X_test_transformed.shape)
+
+#Finally, plot the resulting eigen-vectors of the face PCA model, AKA the eigenffaces
+import matplotlib.pyplot as plt  
+
+#Qualitative evaluation of the predictions using matplotlib
+
+def plot_gallery(images, titles, h, w, n_row=3, n_col=4):
+	"""Helper function to plot a gallery of portraits"""
+	plt.figure(figsize=(1.8*n_col, 2.4*n_row))
+	plt.subplots_adjust(bottom=0, left=.01, right=.99, top=90, hspace=.35)
+
+	for i in range(n_row*n_col):
+		plt.subplot(n_row, n_col, i+1)
+		plt.imshow(images[i].reshape((h,w)), cmap=plt.cm.gray)
+		plt.title(titles[i], size=12)
+		plt.xticks(())
+		plt.yticks(())
+
+eigenface_titles = ["eigenface %d" % i for i in range(eigenfaces.shape[0])]
+plot_gallery(eigenfaces, eigenface_titles, h, w)
+  
+plt.show()
