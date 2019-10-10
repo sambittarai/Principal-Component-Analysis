@@ -42,3 +42,16 @@ print("n_classes: %d" % n_classes)
 
 #Split into a training and a test set using a stratified k fold
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+#X_train.shape -> (966, 1850) -> No. of training data
+#y_train.shape -> (966,) -> No. of training labels
+#Similarly for testing set
+
+#Compute a PCA (eigenfaces) on the face dataset (treated as unlabeled dataset)
+#Unsupervised feature extraction/dimensionality reduction
+
+n_components = 150 #Top 150 dimensions with highest variance
+
+#Center data
+mean = np.mean(X_train, axis=0)
+X_train -= mean
+X_test -= mean
