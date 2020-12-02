@@ -15,6 +15,6 @@ Dimensionality Reduction using PCA and building a Random Forest classifier to do
   ![](Eigen_Faces/e2.png)
 
 
-**Compactness Plot for evaluating the performance of dimensionality reduction
+**Compactness Plot for evaluating the performance of dimensionality reduction**
 
   ![](Compactness_plot.png)
